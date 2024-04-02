@@ -16,7 +16,8 @@ def handle_message(update, context):
 
     if update.message.photo:
         print("update.message.photo:", update.message.photo)
-        #get the last image sent and save in a appropriate format to upload to wordpress
+        #get the last image sent and save in memory as bytes:
+        image = update.message.photo[-1].download_as_bytearray()
         image = bot.get_file(update.message.photo[-1].file_id).file_path
         #upload to wordpress:
 
