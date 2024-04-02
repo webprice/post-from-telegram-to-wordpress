@@ -1,5 +1,5 @@
 
-from wp.wp import post_to_wordpress
+from telegram_to_wordpress.wordpress.core import post_to_wordpress
 import telegram
 from telegram.ext import Updater,CommandHandler
 from settings import settings

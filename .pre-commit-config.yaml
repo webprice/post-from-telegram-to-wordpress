@@ -1,0 +1,29 @@
+repos:
+-   repo: https://github.com/psf/black
+    rev: "23.3.0"
+    hooks:
+    - id: black
+      language_version: python3.9
+      files: ^post-from-telegram-to-wordpress/
+      args: [--config]
+-   repo: https://github.com/PyCQA/isort
+    rev: "5.12.0"
+    hooks:
+      - id: isort
+        language_version: python3.9
+        files: ^post-from-telegram-to-wordpress/
+        args: [--cr, ./, --resolve-all-configs]
+-   repo: https://github.com/PyCQA/flake8
+    rev: "6.0.0"
+    hooks:
+    - id: flake8
+      additional_dependencies: [
+        flake8-bugbear,
+        flake8-builtins,
+        flake8-docstrings,
+        flake8-simplify,
+        flake8-async
+      ]
+      language_version: python3.9
+      files: ^post-from-telegram-to-wordpress/
+      args: [--config, ./.flake8]

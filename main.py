@@ -1,8 +1,12 @@
-from tg.bot import run_bot
+from telegram_to_wordpress.telegram_bot.core import run_bot
 
-def main():
+def app():
     print('Starting bot...')
     run_bot()
 
 if __name__ == '__main__':
-    main()
+    #run with uvicorn main:app --reload
+    import uvicorn
+
+    uvicorn.run("main:app", host="8000", reload=True)
+

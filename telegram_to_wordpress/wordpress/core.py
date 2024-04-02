@@ -1,5 +1,5 @@
-from wp.serializers import ParsedMessage, PostData
-from rest import wp as wp_rest
+from telegram_to_wordpress.wordpress.serializers import ParsedMessage, PostData
+from telegram_to_wordpress.rest import wordpress as wp_rest
 from typing import Optional, Any
 
 async def post_to_wordpress(message, image:Optional[Any] = None) -> Optional[dict]:
