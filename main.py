@@ -1,11 +1,13 @@
-import telegram
-from telegram.ext import Updater,MessageHandler,MessageFilter, Filters,CommandHandler
-from settings import settings
-from bot import run_bot
+from telegram_to_wordpress.telegram_bot.core import run_bot
+import uvicorn
 
-def main():
-    # Start Telegram bot
+
+def app():
+    print('Starting bot...')
     run_bot()
 
 if __name__ == '__main__':
-    main()
+
+    uvicorn.run("main:app", host="0.0.0.0",port=8000, reload=True)
+
+
