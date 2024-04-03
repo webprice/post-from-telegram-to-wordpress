@@ -10,7 +10,7 @@ class Settings():
     WP_PASSWORD: str =  os.environ.get("WP_PASSWORD")
     WP_CATEGORY_ID: int = os.environ.get("WP_CATEGORY_ID")
     DOMAIN_BASE: str = os.environ.get("DOMAIN_BASE")
-
+    GITHUB_REPO_URL: str = "https://github.com/webprice/post-from-telegram-to-wordpress/"
 
 
 settings = Settings()

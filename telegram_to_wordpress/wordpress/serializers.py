@@ -1,6 +1,11 @@
+from enum import Enum
 from typing import Optional
+
 from pydantic import BaseModel
+
 from settings import settings
+
+
 class ParsedMessage(BaseModel):
     title: Optional[str]
     content: Optional[str]
@@ -10,7 +15,7 @@ class ParsedMessage(BaseModel):
         title = message.split("\n")[0]
         content = "\n".join(message.split("\n")[1:])
         return ParsedMessage(title=title, content=content)
-from enum   import Enum
+
 class PostStatus(str, Enum):
     publish = 'publish'
 
