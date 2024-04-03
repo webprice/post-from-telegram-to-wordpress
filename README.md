@@ -1,4 +1,7 @@
 # post-from-telegram-to-wordpress
+V2:
+added photo/image media support. Upload photo as wordpress post's thumbnail alongside with text content.
+V1:
 requires poetry
 
 or you can manually install dependencies by `pip install` commands
