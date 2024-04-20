@@ -20,4 +20,5 @@ def run_bot():
 
     updater.start_polling()
     updater.idle()
+    print("Bot stopped")
 
