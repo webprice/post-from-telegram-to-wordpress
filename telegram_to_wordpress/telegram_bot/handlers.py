@@ -1,7 +1,10 @@
 import asyncio
+from settings import settings
 
 from telegram_to_wordpress.wordpress.core import post_to_wordpress
+import logging
 
+logger = logging.getLogger(__name__)
 
 def parse_update_message(update):
     if update.message.text:
@@ -17,18 +20,12 @@ def parse_update_photo(update,context):
     if update.message.photo:
         from io import BytesIO
 
-        # Get the file ID of the largest photo sent
         file_id = update.message.photo[-1].file_id
-        # Get the file object
         file = context.bot.get_file(file_id)
-        # Read the file content into memory
         bio = BytesIO()
         file.download(out=bio)
-        # Get the bytes representation of the image
         image_bytes = bio.getvalue()
-        # Now you have the image data stored in memory as bytes
-        # You can further process the image or send it to WordPress
-        # For example, you can call the upload_image_to_wordpress function
+
     print("image_bytes - ",bool(image_bytes))
 
     return image_bytes
@@ -38,10 +35,23 @@ def parse_wp_post_respose(response):
         article_url = response.get('link')
         return f'Message posted to WordPress successfully!, Article url: {article_url}'
     else:
-        from settings import settings
         return (f"Failed to post message to WordPress. Visit official repo: {settings.GITHUB_REPO_URL}")
 
 def handle_message(update, context):
+    logger.info("update: %s", update)
+
+    try:
+        coverted = update.to_dict() #otherwise shadowing from builtins
+
+    except Exception as e:
+        logger.error("Error converting update to dict: %s", e)
+        update.message.reply_text("Error processing your request")
+        return
+
+    if int(coverted["message"]["from"]["id"]) != int(settings.OWNER_TELEGRAM_ID):
+        print(f'{coverted["message"]["from"]["id"]} - not authorized to use this bot')
+        update.message.reply_text("You are not authorized to use this bot")
+        return
 
     message = parse_update_message(update)
     image_bytes = parse_update_photo(update,context)
